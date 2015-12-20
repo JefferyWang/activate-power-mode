@@ -33,8 +33,9 @@ function getCaret() {
         (el.tagName === 'INPUT' && el.getAttribute('type') === 'text')) {
         var offset = require('textarea-caret-position')(el, el.selectionStart);
         bcr = el.getBoundingClientRect();
+        var x = offset.left + bcr.left;
         return {
-            x: offset.left + bcr.left,
+            x: offset.left > el.clientWidth ? (bcr.left+el.clientWidth) : x,
             y: offset.top + bcr.top,
             color: getColor(el)
         };
